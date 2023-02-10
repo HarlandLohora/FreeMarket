@@ -1,24 +1,52 @@
-<div id="form">
-  <h2>Sign Up</h2>
-  <form action="/auth/signup" method="POST">
-
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
-
-    <label> Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
-
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
-
-    <button type="submit">Sign Up</button>
+<link rel="stylesheet" href="/stylesheets/signup.css">
 
 
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </form>
-</div>
+<section class="sectionSignUp">
+  <div id="form" class="signUpForm">
+    <h2>Sign Up</h2>
+    <form action="/auth/signup" method="POST" class="formSignUp">
+
+      <div class="names">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Name</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="name" >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">LastName</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="lastname" >
+        </div>
+      </div>
+      <div class="names">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Username</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="username" >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">BirthDay</label>
+          <input type="datetime-local" class="form-control" id="exampleFormControlInput1" name="fechaNacimiento" >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput2" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput2" name="email" >
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput3" class="form-label">Password</label>
+        <input type="text" class="form-control" id="exampleFormControlInput3" name="password" >
+      </div>
+
+      <div class="mb-3">
+        ¿Ya tienes una cuenta? <a href="/auth/login">Acceder</a>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary">Sign Up</button>
+
+
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
+    </form>
+  </div>
+
+  <div class="bgBici"></div>
+</section>
