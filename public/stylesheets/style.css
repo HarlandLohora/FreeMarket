@@ -1,12 +1,36 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: #00b7ff;
+.hero{
+  width: 100vw;
+  height: 80vh;
+  background-image: url("../images/Amarillo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-h1 {
-  color: 15px;
+nav{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background-color: rgba(0,0,0,075);
+  color: white;
+  height: 10%;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+.slogan{
+  height: 90%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 40px;
 }
