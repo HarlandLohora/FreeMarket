@@ -19,7 +19,7 @@ const ProductoSchema = new Schema({
     cantidad: {
         type: Number,
     },
-    fotos: [String],
+    fotos: String,
     categoria: {
         type: String,
         required: true,

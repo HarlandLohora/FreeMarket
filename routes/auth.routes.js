@@ -22,10 +22,10 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
-
+  const { username, email, password, name, lastname, fechaNacimiento, genero } = req.body;
+  console.log(req.body)
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (username === "" || email === "" || password === "" || name === "" || lastname === "") {
     res.status(400).render("auth/signup", {
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
@@ -60,8 +60,25 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .genSalt(saltRounds)
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
+
+      // let foto = "https://svgsilh.com/svg_v2/2098873.svg"
+
+      // if (genero === "hombre") {
+      //   foto = "https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+      // } else if (genero === "mujer") {
+      //   foto = "https://static.vecteezy.com/system/resources/previews/002/275/818/non_2x/female-avatar-woman-profile-icon-for-network-vector.jpg"
+      // } 
+
+      let opciones = {
+        hombre: "https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg",
+        mujer: "https://static.vecteezy.com/system/resources/previews/002/275/818/non_2x/female-avatar-woman-profile-icon-for-network-vector.jpg",
+        otro: "https://svgsilh.com/svg_v2/2098873.svg"
+      }
+
+      let foto = opciones[genero]
+
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({ username, email, password: hashedPassword, name, lastname, fechaNacimiento, foto });
     })
     .then((user) => {
       res.redirect("/auth/login");
@@ -87,10 +104,10 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (email === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, email and password.",
@@ -134,7 +151,13 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           // Remove the password field
           delete req.session.currentUser.password;
 
-          res.redirect("/");
+          //Dependiendo del role te mando a tu respectiva ruta
+          if (user.role === "admin") {
+            res.redirect("/admin/dashboard");
+          } else if (user.role === "cliente") {
+            res.redirect("/products")
+          }
+
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
