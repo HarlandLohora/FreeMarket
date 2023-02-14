@@ -1,0 +1,25 @@
+<div>
+    <form action="/profile/{{datos._id}}" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">username</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" name="username" value='{{datos.username}}'>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" name="name" value='{{datos.name}}'>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">email</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" name="email" value='{{datos.email}}'>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">URL</label>
+            <input type="file" class="form-control" id="exampleFormControlInput2" name="foto" >
+        </div>
+   
+        <img src="{{datos.foto}}" alt="" width="100" height="100">
+
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
